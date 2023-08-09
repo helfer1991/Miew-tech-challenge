@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
+
 import { useLocation } from 'react-router-dom'; 
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { Pagination } from '../../components/pagination/pagination';
-import { SearchResultsWrapper, SearchBarContainer, SearchResultsContainer} from './styles';
-import { Movie } from '../../components/movie/movie';
+import { SearchBarContainer, SearchResultsContainer} from './styles';
 import { searchMovies } from '../../features/search-slice/search-slice';
 import { SearchBar } from '../../components/search-bar/search-bar';
 import { selectSearchResults, selectSearchLoading, selectSearchTotalPages } from '../../features/selectors/search-selectors';

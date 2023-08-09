@@ -27,4 +27,3 @@ export const selectCurrentPage = createSelector(
   (state: RootState) => state.pagination.currentPage,
   currentPage => currentPage
 );
-

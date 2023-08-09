@@ -9,12 +9,10 @@ const mockApiResponse = {
   data: {
     results: [
       {
-        original_title: 'Movie 1',
         id: 1,
-        overview: 'Movie 1 Overview',
-        poster_path: 'poster_path_1',
+        imageUrl: 'poster_path_1',
         title: 'Movie 1',
-        vote_average: 7.5,
+        rating: 7.5,
       },
     ],
     total_pages: 10,

@@ -13,7 +13,7 @@ export type MovieProps = {
   onClick?: (title: string) => void,
 }
 
-export const Movie: React.FC<MovieProps> = memo(({ title, rating, imageUrl, onClick, id }) => {
+export const Movie: React.FC<MovieProps> = memo(({ title, rating, imageUrl, id, onClick }) => {
   const { movies, setFavouritesUpdated, setShamesUpdated } = useMoviesContext();
   const [imgSrc, setImgSrc] = useState<string | undefined>(`https://www.themoviedb.org/t/p/w150_and_h225_face${imageUrl}`);
   const isFavourite = isMovieInFavourites(title, movies['favourites']);
@@ -23,6 +23,7 @@ export const Movie: React.FC<MovieProps> = memo(({ title, rating, imageUrl, onCl
   useEffect(() => {
       setIsDisabled(isFavourite || isShame);
   }, [isFavourite, isShame]);
+  
   const onError = (): void =>
   setImgSrc(
       "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='110'%3E%3Crect width='400' height='110' style='fill:rgb(233,238,240);stroke-width:3;stroke:rgb(233,238,240)' /%3E%3C/svg%3E"
