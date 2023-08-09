@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
-import { Movie, MovieProps } from '../movie';
+import { Movie } from '../movie';
+import type { MovieProps } from '../movie';
 import { isMovieInFavourites, isMovieInShames } from '../../../utils/helper';
 import { MoviesContext } from '../../../context/local-storage-context';
 

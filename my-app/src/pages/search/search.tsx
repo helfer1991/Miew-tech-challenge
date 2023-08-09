@@ -8,6 +8,7 @@ import { searchMovies } from '../../features/search-slice/search-slice';
 import { SearchBar } from '../../components/search-bar/search-bar';
 import { selectSearchResults, selectSearchLoading, selectSearchTotalPages } from '../../features/selectors/search-selectors';
 import { CardsListSkeleton } from '../../components/skeletons/cards-list-skeleton/cards-list-skeleton';
+import { MoviesList } from '../../components/movies-list/movies-list';
 
 const Search: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -48,17 +49,7 @@ const Search: React.FC = () => {
         <SearchBar setSearchResult={setSearchTerm} />
       </SearchBarContainer>
       {isResultsAboveZero &&
-        <SearchResultsWrapper>
-          {movies?.map((movie) => (
-            <Movie
-              title={movie.title}
-              imageUrl={movie.poster_path}
-              rating={movie.vote_average}
-              id={movie.id}
-              key={movie.id}
-            />
-          ))}
-        </SearchResultsWrapper>
+        <MoviesList movies={movies} />
       }
       {totalPages > 1 && <Pagination totalPages={totalPages} />}
     </SearchResultsContainer>

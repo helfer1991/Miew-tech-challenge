@@ -9,7 +9,6 @@ const Shames = React.lazy(() => import ('./pages/shames/shames'));
 const Favourites = React.lazy(() => import ('./pages/favourites/favourites'));
 const Footer = React.lazy(() => import('./components/footer/footer'));
 
-
 function App() {
   return (
     <Container>
