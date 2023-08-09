@@ -6,14 +6,18 @@ import { SearchResultsWrapper, SearchBarContainer, SearchResultsContainer} from 
 import { Movie } from '../../components/movie/movie';
 import { searchMovies } from '../../features/search-slice/search-slice';
 import { SearchBar } from '../../components/search-bar/search-bar';
+import { selectSearchResults, selectSearchLoading, selectSearchTotalPages } from '../../features/selectors/search-selectors';
+import { CardsListSkeleton } from '../../components/skeletons/cards-list-skeleton/cards-list-skeleton';
 
 const Search: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const { currentPage } = useAppSelector((state) => state.pagination);
-  const { results, total_pages: totalPages } = useAppSelector((state) => state.search);
+  const movies = useAppSelector(selectSearchResults);
+  const loading = useAppSelector(selectSearchLoading);
+  const totalPages = useAppSelector(selectSearchTotalPages);
   const dispatch = useAppDispatch();
   const location = useLocation();
-  const isResultsAboveZero = results.movies.length > 0;
+  const isResultsAboveZero = movies.length > 0;
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -21,17 +25,21 @@ const Search: React.FC = () => {
     setSearchTerm(searchTermFromQuery);
   }, [location.search]);
 
-  const handleSearch = () => {
-    dispatch(searchMovies({ searchTerm, currentPage }));
-  };
-
   useEffect(() => {
     if (currentPage > 1 || searchTerm) {
       handleSearch(); 
     }
   }, [currentPage, searchTerm]);
 
+  const handleSearch = () => {
+    dispatch(searchMovies({ searchTerm, currentPage }));
+  };
+
   const title = isResultsAboveZero ? <h1>Your search results for {searchTerm}!</h1> : <h1>No results!</h1>;
+
+  if(loading) {
+    return <CardsListSkeleton />;
+  }
 
   return (
     <SearchResultsContainer>
@@ -41,7 +49,7 @@ const Search: React.FC = () => {
       </SearchBarContainer>
       {isResultsAboveZero &&
         <SearchResultsWrapper>
-          {results.movies?.map((movie) => (
+          {movies?.map((movie) => (
             <Movie
               title={movie.title}
               imageUrl={movie.poster_path}

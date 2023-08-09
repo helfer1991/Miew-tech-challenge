@@ -8,18 +8,23 @@ import { CardsListSkeleton } from '../../components/skeletons/cards-list-skeleto
 import { Pagination } from '../../components/pagination/pagination';
 import { ScrollToTopButton } from '../../components/scroll-to-top-button/scroll-to-top-button';
 import { SearchBar } from '../../components/search-bar/search-bar';
+import { selectMovies, selectLoading, selectTotalPages, selectTotalResults } from '../../features/selectors/movie-selectors';
 
 const Movies: React.FC = () => {
   const [ , setSearchTerm] = useState<string>('');
   const dispatch = useAppDispatch();
   const { currentPage } = useAppSelector((state) => state.pagination);
-  const { results, total_pages, total_results: totalResults } = useAppSelector((state) => state.movies);
+
+  const movies = useAppSelector(selectMovies);
+  const loading = useAppSelector(selectLoading);
+  const totalResults = useAppSelector(selectTotalResults);
+  const totalPages = useAppSelector(selectTotalPages);
 
   useEffect(() => {
     dispatch(fetchMovies(currentPage));
   }, [dispatch, currentPage]);
 
-  if (results.loading) {
+  if (loading) {
     return <CardsListSkeleton />;
   }
 
@@ -28,7 +33,7 @@ const Movies: React.FC = () => {
       <h1>There are currently {totalResults} movies in our database</h1>
       <SearchBar setSearchResult={setSearchTerm} />
       <MoviesWrapper>
-        {results.movies?.map((movie) =>
+        {movies?.map((movie) =>
           <Movie 
             title={movie.title}
             imageUrl={movie.poster_path}
@@ -39,7 +44,7 @@ const Movies: React.FC = () => {
         )}
         <ScrollToTopButton />
       </MoviesWrapper>
-      <Pagination totalPages={total_pages} />
+      <Pagination totalPages={totalPages} />
     </MoviesContainer>
   )
 };

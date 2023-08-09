@@ -2,10 +2,10 @@ import paginationReducer, {
     nextPage,
     previousPage,
 } from '../pagination-slice';
-import type { InitialState } from '../pagination-slice';
+import type { PaginationState } from '../pagination-slice';
 
 describe('counter reducer', () => {
-  const initialState: InitialState = {
+  const initialState: PaginationState = {
     currentPage: 1,
   };
 
