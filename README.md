@@ -42,7 +42,7 @@ The favourites/shames are stored on local storage and can be interacted with thr
 I'm aware one of the requirements was to have the swipeable feature to decide whether a given movie is a favourite or not, however I decided against it for the following reasons:
 - Tinder on desktop doesn't look good from a UX perspective. With the mouse one has to swipe to the right, or left, and also has the option of clicking on an arrow to see the next card if no swipeable action is done. Tinder was made, I would say, with the goal of having the majority of its traffic coming from mobile platforms.
 According to my experience, the UX experience on the browser on different devices should not be dramatically different and the development time required to attend to both needs would be higher;
-- Despite this, for the sake of learning I gave it a go to the Swiper library (https://swiperjs.com/react). However using Typescript I faced several error on some of the Swiper properties, so, considering my timing limitations, I had to let this go.
+- Despite this, for the sake of learning I gave it a go to the Swiper library (https://swiperjs.com/react). However using Typescript I faced several error on some of the Swiper properties, so, considering my timing limitations, I could not develop my own swiper functionality and had to let this go.
 
 Considering I chose against the Swipeable pattern and did not want to copy the Carousel pattern employed by The MovieDB website, I decided to display on desktop everything as a 4 columns grid. The only endpoint I found retrieved 20 results per page and supported pagination, hence I developed a reducer and a Pagination component.
 On handheld, the movies are displayed individually per row.
@@ -76,7 +76,5 @@ Also, I've created an onError function to display a standardized grey block if t
 - Error states;
 
 - Include on the URL parameters the current page.
-
-
 
 Hope you enjoy it!
